@@ -2,7 +2,7 @@
 
 %clear all
 
-BaseDir='~/Documents/MyMath/Project/UWBRAD/density_fit/';
+BaseDir='SummitData/DensityData';
 
 fid=fopen([BaseDir 'Twickler1Density.txt'],'r');
 fgetl(fid); %header line

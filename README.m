@@ -40,17 +40,33 @@
 % 5)AnalyzeVerticalDensVariations
 %   estimate density vertical spatial autocorrelation at Summit
 
-% 6)DenistyData
-% -MorrisDensity.xlsx: Liz Morris Neutron probe data for density fluction
-% -Twicker1Density.txt: The density data of summit, 0.5m-195m
-% -Twicker2Density.txt: The density data of summit, 94m-bottom
-%                       the resoultion of first 100m is 1m, the rest is 10m
-% -Ice Sheet Density Data.docx: Ken's analysis of summit density
+% -DensityModel.mat: The density model fit from summit with standard 
+%                    deviationof 20.0166 and correlation length of 0.4396
+% RandState: Random number                   
 
-%% ModifiedTempData
+%% 3.ModifiedTempData
 % 1)Adjusted Temp Models.pptx
 %   Ken's slides explaining the Adjusted Temperature Model for Greenland
 %   Parameters(G,M,Ts) are tuned to fit the measured temperature profile
 
 % 2)profileparam.mat
 %   Adjusted parameters for Robin Model
+
+%% 4. SummitData
+
+% 1)DenistyData
+% -MorrisDensity.xlsx: Liz Morris Neutron probe data for density fluction
+% -Twicker1Density.txt: The density data of summit, 0.5m-195m
+% -Twicker2Density.txt: The density data of summit, 94m-bottom
+%                       the resoultion of first 100m is 1m, the rest is 10m
+% -Ice Sheet Density Data.docx: Ken's analysis of summit density
+
+% 2)GISP1m.txt
+% GISP measured temperature profile interpolated to 1m resolution
+
+%% 5.dat
+% 1) ConicalSpiral_40Turns_NoseConeGeometry.csv
+%    antenna pattern file
+
+% 2) UWBRADAntennaConstant.m
+%    Read UWBRAD frequency, theta and antenna pattern 

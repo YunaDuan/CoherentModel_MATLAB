@@ -24,7 +24,7 @@ for i=1:m
     T{i}=interp1(RobinT.z{i},flip(RobinT.T{i}),Z{i});
 end
 
-%% 3 Put together MEMLS inputs
+%% 3 Put together inputs
 freq=1.4;
 theta=[28.8 38 45.8];
 Input_param.frequency=freq;
