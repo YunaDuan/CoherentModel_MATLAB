@@ -21,12 +21,12 @@ load('DecayDensityModel/DensityModel.mat');
 Grid=CoherentGrid(Temps.z(end));
 
 %1.4 Get Sensor data
-cd dat
+cd SensorData
 UWBRADAntennaConstant
 cd ../
  
 %1.5 % Interpolate temperature to grid and convert to K
-T=flip(interp1(Temps.z,Temps.T,Grid.Z))+273.16;
+T=interp1(Temps.z,Temps.T,Grid.Z)+273.16;
 
 %% 2 Put together inputs
 
@@ -42,11 +42,12 @@ S=load('DecayDensityModel/RandState.mat');
 Num_real = 20; % Number of realizations
 
 density=GetRealizations_v2(RhoMod,Grid,Num_real,S);
-Input_param.density_profile = density;
 
+cd Coherent_model
 tic
 for n=1:Num_real
-    if mod(n,10)==0,
+    Input_param.density_profile = density(n,:);
+    if mod(n,5)==0,
         disp(['Running realization #' num2str(n) '/' num2str(Num_real)])
     end
     [Tb_V(n,:,:),Tb_H(n,:,:),Tb(n,:,:)] = coherent_model(Input_param);

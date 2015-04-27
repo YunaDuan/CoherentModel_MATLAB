@@ -64,9 +64,16 @@
 % 2)GISP1m.txt
 % GISP measured temperature profile interpolated to 1m resolution
 
-%% 5.dat
+%% 5.SensorData
 % 1) ConicalSpiral_40Turns_NoseConeGeometry.csv
 %    antenna pattern file
 
 % 2) UWBRADAntennaConstant.m
 %    Read UWBRAD frequency, theta and antenna pattern 
+
+%% Other Scripts
+% 1. CoherentModelSummitTest.m:
+% Test coherent model based on summit data and compare the results with MEMLS
+
+% 2. CoherentGrid.m:
+% Generate layer scheme for coherent model 
