@@ -1,4 +1,4 @@
-fname='dat/ConicalSpiral_40Turns_NoseConeGeometry.csv';
+fname='SensorData/ConicalSpiral_40Turns_NoseConeGeometry.csv';
 
 UWBRADSensor.GaindB=csvread(fname,1,1,[1,1,181,16]);    
 UWBRADSensor.Theta=180:-2:-180;

@@ -2,6 +2,7 @@
 % Compare the Tb results with MEMLS
 
 clear
+Runs=3;
 Num_real = 200; % Number of realizations
 %% 1 Get data
 %1.1 Temperature data: from Ken's "resampled GISP temps, 1 meter" on the site
@@ -10,17 +11,18 @@ Temps.Data=load('SummitData/GISP1m.txt');
 Temps.z=Temps.Data(:,1);
 Temps.T=Temps.Data(:,2);
 
-%1.2 Density data: using the Twickler and Morris data 
-load('DecayDensityModel/DensityModel.mat');
-S=load('DecayDensityModel/RandState.mat');
-density=GetRealizations_v2(RhoMod,Grid,Num_real,S);
-
-%1.3 Get grid 
+%1.2 Get grid 
 %    for 0-100m, layer thickness is 1cm
 %    for 100-1000m, layer thickness is 0.5m
 %    for the rest,layer thickness is 1m
 
 Grid=CoherentGrid(Temps.z(end));
+
+%1.3 Density data: using the Twickler and Morris data 
+load('DecayDensityModel/DensityModel.mat');
+S=load('DecayDensityModel/RandState.mat');
+density=GetRealizations_v2(RhoMod,Grid,Num_real,S);
+
 
 %1.4 Get Sensor data
 cd SensorData
@@ -72,8 +74,11 @@ end
     Tb_c_m=squeeze(mean(Tb_c,1));      
 toc   
 
-save ('CMTb','Tb_V_m','Tb_H_m','Tb_c_m')
-save ('Input_param','Input_param')
+RunName=['CMTb' num2str(Runs)];
+InputName=['Input_param' num2str(Runs)];
+cd ../Runs/;
+save (RunName,'Tb_V_m','Tb_H_m','Tb_c_m')
+save (InputName,'Input_param')
 %% 3. plot the results
     figure(1)
     plot(fGhz, Tb_V_m,'linewidth',3)
