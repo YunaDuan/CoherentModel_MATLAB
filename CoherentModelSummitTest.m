@@ -2,8 +2,8 @@
 % Compare the Tb results with MEMLS
 
 clear
-Runs=3;
-Num_real = 400; % Number of realizations
+Runs=2;
+Num_real = 1000; % Number of realizations
 %% 1 Get data
 %1.1 Temperature data: from Ken's "resampled GISP temps, 1 meter" on the site
 %    The data's unit is C
@@ -12,7 +12,7 @@ Temps.z=Temps.Data(:,1);
 Temps.T=Temps.Data(:,2);
 
 %1.2 Get grid 
-%    for 0-100m, layer thickness is 1cm
+%    for 0-100m, layer thickness is 2cm
 %    for 100-1000m, layer thickness is 0.5m
 %    for the rest,layer thickness is 1m
 
@@ -47,7 +47,6 @@ Input_param.Temp_profile =T;
 % Delta = 0.040; % Standard Deviation
 % lc = 0.03;   % Correlation Length, it can be an array
 
-
 cd Coherent_model
 Tb_V=zeros(Num_real,length(theta),length(fGhz));
 Tb_H=zeros(Num_real,length(theta),length(fGhz));
@@ -74,15 +73,36 @@ end
     Tb_c_m=squeeze(mean(Tb_c,1));      
 toc   
 
+%cd ../
+%PlotInput
+
+%% 3. Average the Tb on antenna pattern
+for f=1:length(fGhz)
+    [~,fclose]=min(fGhz(f)-UWBRADSensor.Freq);    
+    for q=1:length(theta),
+        j=find(UWBRADSensor.Theta==theta(q));
+        GdB(q,f)=UWBRADSensor.GaindB(j,fclose);
+    end    
+end
+Glin=10.^(GdB./10);
+
+load('MEMLSTb.mat');
+
+CMUWBRADh=sum(Tb_H_m.*Glin)./sum(Glin);
+CMUWBRADv=sum(Tb_V_m.*Glin)./sum(Glin);
+CMUWBRADc=(CMUWBRADv+CMUWBRADh)./2;
+
+MEMLSh=sum(Tbh'.*Glin)./sum(Glin);
+MEMLSv=sum(Tbv'.*Glin)./sum(Glin);
+MEMLSc=(MEMLSh+MEMLSv)./2;
+
 RunName=['CMTb' num2str(Runs)];
 InputName=['Input_param' num2str(Runs)];
 cd ../Runs/;
-save (RunName,'Tb_V_m','Tb_H_m','Tb_c_m')
+save (RunName,'Tb_V_m','Tb_H_m','CMUWBRADh','CMUWBRADv','CMUWBRADc')
 save (InputName,'Input_param')
 
-cd ../
-PlotInput
-%% 3. plot the results
+%% 4. plot the results
     figure
     plot(fGhz, Tb_V_m,'linewidth',3)
     set(gca,'fontsize',14)
@@ -100,9 +120,36 @@ PlotInput
     legend('0', '40', '50')
     
     figure
-    plot(fGhz, Tb_c_m,'linewidth',3)
+    plot(fGhz, CMUWBRADh,'linewidth',3);hold on
+    plot(fGhz, CMUWBRADv,'linewidth',3);hold off
     set(gca,'fontsize',14)
-    title('Brightness Temperature')
+    title('Coherent Model UWBRAD V & H')
     xlabel('Frequency (GHz)')
     ylabel('Brightness Temperature (K)')
-    legend('0', '40', '50')
+    legend('H','V')
+ 
+    figure
+    plot(fGhz, CMUWBRADh,'linewidth',3);hold on
+    plot(fGhz, MEMLSh,'linewidth',3);hold on
+    set(gca,'fontsize',14)
+    title('Coherent Model UWBRAD V & H')
+    xlabel('Frequency (GHz)')
+    ylabel('Brightness Temperature (K)')
+    
+    figure
+    plot(fGhz, CMUWBRADv,'linewidth',3);hold on
+    plot(fGhz, MEMLSv,'linewidth',3);hold off
+    set(gca,'fontsize',14)
+    title('V polarization comparison')
+    legend('Coherent Model','MEMLS')
+    xlabel('Frequency (GHz)')
+    ylabel('Brightness Temperature (K)')
+    
+    figure
+    plot(fGhz, CMUWBRADh,'linewidth',3);hold on
+    plot(fGhz, MEMLSh,'linewidth',3);hold off
+    set(gca,'fontsize',14)
+    title('H polarization comparison')
+    legend('Coherent Model','MEMLS')
+    xlabel('Frequency (GHz)')
+    ylabel('Brightness Temperature (K)')

@@ -8,8 +8,7 @@ Rho_n=zeros(1,length(z));
 % N is the number of point in the first upper layers.
 range = 100; % We consider the first 100 meters
 N= range/(z(2)-z(1)); % N should be a even number... 
-y = randn(N,1);
-rho_n = shurun_noisy_part(y,N,range,Delta,lc); % Delta is in g.cm*-3
+rho_n = density_fluctuation_j(N,Delta,lc,range); % Delta is in g.cm*-3
 Rho_n(z<100) = rho_n;
 
 % Average Trend

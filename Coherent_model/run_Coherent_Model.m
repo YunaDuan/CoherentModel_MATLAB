@@ -11,7 +11,7 @@ M=0.01; % Accumulation rate
 %Density
 alpha_d=30; % Damping Coefficient
 Delta = 0.040; % Standard Deviation
-lc = 0.03;   % Correlation Length, it can be an array
+lc = 0.1;   % Correlation Length, it can be an array
 
 % Monte Carlo Analysis
 Num_real = 5; % Number of realizations
@@ -24,7 +24,7 @@ freq=0.5e9:0.1e9:2e9;
 Tpz = temp_profile(Ts,H,M,-z,G,Kc,Kd); %Robin Model, Becareful the depth is negative there
 
 %Incidence Angle in degrees
-theta=[0 25 45];
+theta=[30 ];
 
 %Input Parameters for the Coherent Model
 Input_param.depth = z;

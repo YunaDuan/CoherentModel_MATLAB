@@ -1,11 +1,12 @@
 function [Tb_V,Tb_H,Tb] = coherent_model(Input_param)
 % Calculation of the Brightness Temperature with the coherent model
-% modified by Yuna to run on multiple point--feb 12th, 2015
+
 z = Input_param.depth ;
 density = Input_param.density_profile ;
 Tpz = Input_param.Temp_profile ;
 freq=Input_param.frequency;
 thet=Input_param.theta;
+
 
 d = z(2:end);
 d1 = [0 d(1:end-1)];
@@ -152,8 +153,8 @@ Tb_h(t,f)=K0/cos(thet_p(t))*sum(imag(eps_reff)/2.*Tpz(2:end).*(A.*conj(A)./Klz_p
 Tb_v(t,f)=K0/cos(thet_p(t))*sum(imag(eps_reff)/2.*Tpz(2:end).*(Klz.*conj(Klz)+Kx^2)./Kl./conj(Kl) ...
     .*(C.*conj(C)./Klz_pp.*(exp(2*Klz_pp.*d)-exp(2*Klz_pp.*d1))-D.*conj(D)./Klz_pp.*(exp(-2*Klz_pp.*d)-exp(-2*Klz_pp.*d1)) ...
     +(Klz.*conj(Klz)-Kx^2)./(Klz.*conj(Klz)+Kx^2).*C.*conj(D)/1i./Klz_p.*(exp(-1i*2*Klz_p.*d)-exp(-1i*2*Klz_p.*d1)) ...
-    -(Klz.*conj(Klz)-Kx^2)./(Klz.*conj(Klz)+Kx^2).*D.*conj(C)/1i./Klz.*(exp(1i*2*Klz_p.*d)-exp(1i*2*Klz_p.*d1)))) ...
-    +K0/cos(thet_p(t))*imag(eps_bot)/2*T_bot*(Kz_bot*conj(Kz_bot)+Kx^2)/Kz_bot/K_bot/conj(K_bot)*T_v*conj(T_v)*exp(-2*Kz_pp_bot*d(Nl));
+    -(Klz.*conj(Klz)-Kx^2)./(Klz.*conj(Klz)+Kx^2).*D.*conj(C)/1i./Klz_p.*(exp(1i*2*Klz_p.*d)-exp(1i*2*Klz_p.*d1)))) ...
+    +K0/cos(thet_p(t))*imag(eps_bot)/2*T_bot*(Kz_bot*conj(Kz_bot)+Kx^2)/Kz_pp_bot/K_bot/conj(K_bot)*T_v*conj(T_v)*exp(-2*Kz_pp_bot*d(Nl));
     end
 end
 Tb_h0=1-abs(r_h)^2;
@@ -163,6 +164,5 @@ Tb_V = real(Tb_v);
 Tb_H = real(Tb_h);
 
 Tb = (Tb_V+Tb_H)./2;
-
 return
 
