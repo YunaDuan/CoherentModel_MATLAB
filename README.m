@@ -84,3 +84,6 @@
 
 %-Input_param2/CMTb2:Run coherent model with summit temperature and ESL
 %density model,200 realization
+
+% -Input_param3/CMTb3: Run coherent model with summit data and decay density
+% model,400 realization

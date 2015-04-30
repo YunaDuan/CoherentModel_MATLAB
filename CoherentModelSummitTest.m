@@ -3,7 +3,7 @@
 
 clear
 Runs=3;
-Num_real = 200; % Number of realizations
+Num_real = 400; % Number of realizations
 %% 1 Get data
 %1.1 Temperature data: from Ken's "resampled GISP temps, 1 meter" on the site
 %    The data's unit is C
@@ -79,24 +79,30 @@ InputName=['Input_param' num2str(Runs)];
 cd ../Runs/;
 save (RunName,'Tb_V_m','Tb_H_m','Tb_c_m')
 save (InputName,'Input_param')
+
+cd ../
+PlotInput
 %% 3. plot the results
-    figure(1)
+    figure
     plot(fGhz, Tb_V_m,'linewidth',3)
+    set(gca,'fontsize',14)
     title('Brightness Temperature Vertical Polarization')
-    xlabel('Frequency (Hz)')
+    xlabel('Frequency (GHz)')
     ylabel('Brightness Temperature (K)')
     legend('0', '40', '50')
     
-    figure(2)
+    figure
     plot(fGhz, Tb_H_m,'linewidth',3)
+    set(gca,'fontsize',14)
     title('Brightness Temperature Horizontal Polarization' )
-    xlabel('Frequency (Hz)')
+    xlabel('Frequency (GHz)')
     ylabel('Brightness Temperature (K)')
     legend('0', '40', '50')
     
-    figure(3)
+    figure
     plot(fGhz, Tb_c_m,'linewidth',3)
+    set(gca,'fontsize',14)
     title('Brightness Temperature')
-    xlabel('Frequency (Hz)')
+    xlabel('Frequency (GHz)')
     ylabel('Brightness Temperature (K)')
     legend('0', '40', '50')
