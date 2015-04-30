@@ -1,7 +1,7 @@
 %script to estimate density vertical spatial autocorrelation at Summit
 
 %clear all
-
+cd ..
 BaseDir='SummitData/DensityData';
 
 fid=fopen([BaseDir 'Twickler1Density.txt'],'r');

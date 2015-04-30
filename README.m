@@ -24,7 +24,7 @@
 %% 2.DecayDensityModel
 % 1)FitDensityModel.m
 %   Get smooth density profile fitting from summit twickler data. 
-%   rho(z)=(rho_m-rho_i) * exp(-z/alpha)  + rho_i )
+%   rho(z)=((rho_m-rho_i) * exp(-z/alpha)  + rho_i )
 
 % 2)GetRealization_v2.m
 %   Generate random noise for density fluctuation
