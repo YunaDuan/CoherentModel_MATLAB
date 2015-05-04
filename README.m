@@ -82,4 +82,7 @@
 % -Input_param1/CMTb1: Run coherent model with summit data and decay density
 % model,200 realization
 
-%-Input_param2/CMTb2:1000 realization
+%-Input_param2/CMTb2:1000 realization,2 cm layers
+%-Input_param3/CMTb3:1000 realization,2 cm layers and all 1000 realizations
+%are stored
+%-Input_param4/CMTb4:1000 realization,1cm layers

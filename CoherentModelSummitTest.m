@@ -2,7 +2,7 @@
 % Compare the Tb results with MEMLS
 
 clear
-Runs=2;
+Runs=4;
 Num_real = 1000; % Number of realizations
 %% 1 Get data
 %1.1 Temperature data: from Ken's "resampled GISP temps, 1 meter" on the site
@@ -21,11 +21,11 @@ Grid=CoherentGrid(Temps.z(end));
 %1.3 Density data: using the Twickler and Morris data 
 load('DecayDensityModel/DensityModel.mat');
 S=load('DecayDensityModel/RandState.mat');
+cd DecayDensityModel
 density=GetRealizations_v2(RhoMod,Grid,Num_real,S);
 
-
 %1.4 Get Sensor data
-cd SensorData
+cd ../SensorData
 UWBRADAntennaConstant
 cd ../
  
@@ -73,7 +73,7 @@ end
     Tb_c_m=squeeze(mean(Tb_c,1));      
 toc   
 
-%cd ../
+cd ../
 %PlotInput
 
 %% 3. Average the Tb on antenna pattern
@@ -98,9 +98,10 @@ MEMLSc=(MEMLSh+MEMLSv)./2;
 
 RunName=['CMTb' num2str(Runs)];
 InputName=['Input_param' num2str(Runs)];
-cd ../Runs/;
-save (RunName,'Tb_V_m','Tb_H_m','CMUWBRADh','CMUWBRADv','CMUWBRADc')
-save (InputName,'Input_param')
+cd Runs/;
+save (RunName,'Tb_V_m','Tb_H_m','CMUWBRADh','CMUWBRADv','CMUWBRADc'...
+    ,'Tb_H','Tb_V','Tb_c','Input_param')
+%save (InputName,'Input_param')
 
 %% 4. plot the results
     figure
