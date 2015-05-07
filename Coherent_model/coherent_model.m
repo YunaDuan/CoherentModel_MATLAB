@@ -1,4 +1,4 @@
-function [Tb_V,Tb_H,Tb] = coherent_model(Input_param)
+!function [Tb_V,Tb_H,Tb] = coherent_model(Input_param)
 % Calculation of the Brightness Temperature with the coherent model
 
 z = Input_param.depth ;

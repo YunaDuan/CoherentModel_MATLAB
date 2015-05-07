@@ -1,0 +1,18 @@
+% Export .mat file to dat format for fortran
+dir=' /Users/yuna/Documents/MyMath/Project/UWBRAD_Estimation/dat';
+cd /Users/yuna/Documents/MyMath/Project/CoherentModel_Fortran/dat
+
+load(['Robin_Sensitive_Study.mat'])
+load('CISMG.mat')
+
+csvwrite('Ts.dat',Ts.mat)
+csvwrite('H.dat',Ts.mat)
+csvwrite('M.dat',Ts.mat)
+csvwrite('CISMG.dat',CISMG.mat)
+
+ 
+
+rmpath /Users/yuna/Documents/MyMath/Project/UWBRAD_Estimation/dat 
+
+
+
